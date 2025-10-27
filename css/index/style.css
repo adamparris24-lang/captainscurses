@@ -1,0 +1,29 @@
+.container {
+display: flex;
+}
+
+.banim {
+	margin-top: 4%
+}
+
+.all img {
+	transform:scale(0.18)
+}
+div.menu1 {
+	margin-top: 3%;
+	margin-left: 3%
+}
+div.menu2 {
+	margin-left: 5%
+}
+div.menu3{
+		margin-left: 6%;
+	margin-top: -1%
+}
+div.logo  { margin-left: 2%;
+	margin-top: -6% 
+}
+div.submit{
+	margin-top: 2%;
+	margin-left: 3%
+}

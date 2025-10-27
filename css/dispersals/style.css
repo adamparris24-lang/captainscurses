@@ -1,0 +1,37 @@
+body {
+  font-family: 'CaslonAntique', serif; /* fallback to serif just in case */
+  color: white;                        /* if you want white text */
+  background: #000;                     /* keep your black background */
+}
+
+#lfthd {
+  width: 15%;  
+ margin-left: 2%; /* your flex width */
+  display: flex;
+  align-items: top;     /* center vertically */
+  display: flex;
+  flex-direction: column;  /* stack children vertically */
+}
+
+#header-img {
+  width: 90%;   /* 80% of the header’s width */
+  height: auto; /* maintain aspect ratio */
+
+}
+
+#info-container {
+  display: flex;
+  flex-direction: column;  /* stack text and buttons vertically */
+  gap: 10px;               /* space between items */
+  width: 100%;             /* fill container width */
+}
+
+#map::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;   /* so you can still interact with the map */
+  backdrop-filter: sepia(30%) brightness(0.8) contrast(1.2);
+}

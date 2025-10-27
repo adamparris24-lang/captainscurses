@@ -1,0 +1,237 @@
+<!doctype html>
+<html> 
+<head>
+  <meta charset="UTF-8">
+  <title>Dispersals</title>
+  <link href="css/dispersals/style.css" rel="stylesheet" type="text/css">
+  <link href="css/dispersals/theme.css" rel="stylesheet" type="text/css">
+  
+  <!-- Styles -->
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      background: #000;
+      font-family: sans-serif;
+    }
+
+    /* Main container flex for header + map */
+    #container {
+      display: flex;
+      height: 100vh; /* full viewport height */
+      width: 100%;
+    }
+
+    /* Header box on left */
+    #header {
+      width: 8%;             /* 8% of screen width */
+      background: #000;      /* dark so you can see it */
+      color: white;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    /* Map box on right */
+    #map {
+      flex: 1;               /* takes all remaining space */
+      margin: 20px;          /* space around map */
+    }
+  </style>
+
+  <!-- Google Maps API: put in head -->
+  <script async
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_D3tK3uO3Kk83wz7n7QAFSrKU0qB-ULU&callback=initMap&v=beta&libraries=marker">
+  </script>
+</head>
+<body> 	
+
+<div id="container">
+  <!-- Left header box -->
+<div id="lfthd" style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+
+  <!-- Header image -->
+ <a href="index.html">
+   <img src="Images/Oyo Disp.png" id="header-img" style="display: block; margin: 0 auto;">
+</a>
+  <!-- Submit button -->
+  <a href="submissions.html" style="display: block; margin: 0 auto;">
+    <img src="Images/Submit Dispersal.svg"style="width: 100px; height: auto; display: block;">
+  </a>
+  <div id="info-container" style="display: flex; flex-direction: column; align-items: center; gap: 5px; width: 100%;">
+    
+<p style="font-family: 'CaslonAntique', serif; text-align: center; font-size: 20px; margin: 0;">
+  Running Count:
+</p>
+<p style="font-family: 'CaslonAntique', serif; text-align: center; font-size: 36px; margin: 0;">
+  1
+</p>
+    <!-- Left-aligned description -->
+    <p style="font-family: 'CaslonAntique', serif; margin: 10px 0 0 0; text-align: Center; width: 100%; opacity: 0.8">
+      About Dispersals:
+    </p>
+     <p style="font-family: 'CaslonAntique', serif; margin: 10px 0 0 0; text-align: Center; width: 100%; opacity: 0.8">
+      Lorem ipsum dolem ipsum dolem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur et leo nec leo varius tincidunt.
+    </p>
+  </div>
+</div>
+   <div id="map"></div>
+	</div>
+<script>
+  function initMap() {
+    // Create the map
+const map = new google.maps.Map(document.getElementById("map"), {
+  center: { lat: 37.7749, lng: -122.4194 },
+  zoom: 15,
+  mapTypeId: 'satellite',
+  disableDefaultUI: true,
+  gestureHandling: "greedy",
+  backgroundColor: '#000000',
+	zoom: 4,
+});
+// Classic marker
+  const marker = new google.maps.Marker({
+    position: { lat: 37.7749, lng: -122.4194 },
+    map: map,
+    title: "Disp 1"
+  }); 
+  const pages = [
+  `<p>Page 1: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum.</p>`,
+  `<p>Page 2: Cras placerat ultricies felis, in fermentum urna dapibus sed. Curabitur et leo nec leo varius tincidunt.</p>`,
+  `<p>Page 3: Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>`
+];
+
+let currentPage = 0;
+
+const infowindow = new google.maps.InfoWindow({
+  content: `
+    <div style="
+      display: flex;
+      flex-direction: column;
+      background-color: black;
+      color: white;
+      font-family: 'CaslonAntique', serif;
+      border-radius: 8px;
+      padding: 10px;
+      box-sizing: border-box;
+      max-width: 380px;
+    ">
+      
+      <!-- Top row: dispersal + coords (left), number (center), description (right) -->
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+        
+        <!-- Left: Dispersal + coords -->
+        <div style="display: flex; flex-direction: column;">
+          <div style="font-weight: bold; margin-bottom: 5px;">Dispersal 1</div>
+          <div>
+            <a href="https://www.google.com/maps/search/?api=1&query=37.7749,-122.4194" 
+               target="_blank" style="color: white; text-decoration: underline;">
+              lat: 37.7749
+            </a>
+          </div>
+          <div>
+            <a href="https://www.google.com/maps/search/?api=1&query=37.7749,-122.4194" 
+               target="_blank" style="color: white; text-decoration: underline;">
+              lng: -122.4194
+            </a>
+          </div>
+        </div>
+
+        <!-- Center: Number -->
+        <div style="font-size: 32px; font-weight: bold; text-align: center; flex: 1;">
+          1
+        </div>
+
+        <!-- Right: Description -->
+        <div style="max-width: 150px; text-align: right;">
+          <div style="font-weight: bold;">What & Where</div>
+          <div>Ghostwood 1</div>
+          <div>Under the Bridge</div>
+        </div>
+      </div>
+
+      <!-- Image carousel 16:9 -->
+      <div style="display: flex; flex-direction: column; align-items: center; width: 100%; margin-bottom: 10px;">
+        <div style="position: relative; width: 100%; padding-top: 56.25%; border-radius: 5px; overflow: hidden;">
+          <img id="carousel-img" src="Images/photo1.jpg" 
+               style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;" />
+        </div>
+        <div style="margin-top: 5px; display: flex; justify-content: center; gap: 5px;">
+          <button id="prev-btn">&#9664;</button>
+          <button id="next-btn">&#9654;</button>
+        </div>
+      </div>
+
+      <!-- Audio players -->
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 5px; margin-bottom: 10px;">
+        <!-- Row 1: 2 players -->
+        <div style="display: flex; gap: 5px; justify-content: center;">
+          <audio controls src="audio/audio1.mp3" style="width: 160px;"></audio>
+          <audio controls src="audio/audio2.mp3" style="width: 160px;"></audio>
+        </div>
+        <!-- Row 2: 1 player centered -->
+        <div>
+          <audio controls src="audio/audio3.mp3" style="width: 160px;"></audio>
+        </div>
+      </div>
+
+      <!-- Multi-page text box 16:9 -->
+      <div style="width: 100%;">
+        <div id="text-box" style="position: relative; width: 100%; padding-top: 56.25%; background-color: black; border-radius:5px; overflow: hidden;">
+          <div id="text-content" style="position: absolute; top:0; left:0; width:100%; height:100%; padding:10px; box-sizing:border-box; overflow-y:auto;">
+            <p>Page 1: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          </div>
+        </div>
+        <div style="display: flex; justify-content: center; margin-top: 5px; gap: 5px;">
+          <button id="text-prev-btn">&#9664;</button>
+          <button id="text-next-btn">&#9654;</button>
+        </div>
+      </div>
+    </div>
+  `
+});
+
+// Carousel and text functionality
+infowindow.addListener("domready", () => {
+  // Image carousel
+  const images = ["Images/photo1.jpg", "Images/photo2.jpg", "Images/photo3.jpg"];
+  let index = 0;
+  const img = document.getElementById("carousel-img");
+  const prev = document.getElementById("prev-btn");
+  const next = document.getElementById("next-btn");
+
+  prev.addEventListener("click", () => {
+    index = (index - 1 + images.length) % images.length;
+    img.src = images[index];
+  });
+
+  next.addEventListener("click", () => {
+    index = (index + 1) % images.length;
+    img.src = images[index];
+  });
+
+  // Multi-page text
+  const prevBtn = document.getElementById('text-prev-btn');
+  const nextBtn = document.getElementById('text-next-btn');
+  const textContent = document.getElementById('text-content');
+
+  prevBtn.addEventListener('click', () => {
+    currentPage = (currentPage - 1 + pages.length) % pages.length;
+    textContent.innerHTML = pages[currentPage];
+  });
+
+  nextBtn.addEventListener('click', () => {
+    currentPage = (currentPage + 1) % pages.length;
+    textContent.innerHTML = pages[currentPage];
+  });
+});
+
+// Marker click
+marker.addListener("click", () => {
+  infowindow.open(map, marker);
+});
+}
+</script>
+ </body>
+</html>
